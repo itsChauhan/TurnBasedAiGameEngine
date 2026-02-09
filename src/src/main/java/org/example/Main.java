@@ -24,6 +24,7 @@ public class Main {
         Player computer = new Player("X");
         Scanner scanner = new Scanner(System.in);
         while(!gameEngine.isComplete(board).isOver()){
+            System.out.println(board);
             System.out.println("Make Your Move");
             int row = scanner.nextInt();
             int col = scanner.nextInt();
@@ -37,6 +38,7 @@ public class Main {
         }
 
         System.out.println("GameResult : " + gameEngine.isComplete(board));
+        System.out.println(board);
 
 
 

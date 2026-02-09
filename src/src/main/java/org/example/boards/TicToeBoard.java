@@ -2,6 +2,7 @@ package org.example.boards;
 
 import org.example.game.Board;
 import org.example.game.Cell;
+import org.example.game.Move;
 
 public class TicToeBoard extends Board {
     String[][] cells = new String[3][3];
@@ -31,5 +32,8 @@ public class TicToeBoard extends Board {
         return result;
     }
 
-
+    @Override
+    public void move(Move move) {
+        this.setCell(move.getCell(), move.getPlayer().getSymbol());
+    }
 }

@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.api.AiEngine;
+import org.example.api.GameRuleEngine;
 import org.example.api.TurnBasedAiGameEngine;
 import org.example.boards.TicToeBoard;
 import org.example.game.Board;
@@ -14,6 +16,9 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
+    private static  AiEngine aiEngine = new AiEngine();
+    private static GameRuleEngine gameRuleEngine = new GameRuleEngine();
+
 
 
     public static void main(String[] args) {
@@ -23,21 +28,21 @@ public class Main {
         Player opponent = new Player("O");
         Player computer = new Player("X");
         Scanner scanner = new Scanner(System.in);
-        while(!gameEngine.isComplete(board).isOver()){
+        while(!gameRuleEngine.isComplete(board).isOver()){
             System.out.println(board);
             System.out.println("Make Your Move");
             int row = scanner.nextInt();
             int col = scanner.nextInt();
-            Move oppMove = new Move(new Cell(row, col));
-            gameEngine.move(board, opponent, oppMove);
+            Move oppMove = new Move(new Cell(row, col), opponent);
+            gameEngine.move(board, oppMove);
             System.out.println(board);
-            if(!gameEngine.isComplete(board).isOver()){
-                Move computerMove = gameEngine.suggestMove(computer, board);
-                gameEngine.move(board, computer, computerMove);
+            if(!gameRuleEngine.isComplete(board).isOver()){
+                Move computerMove = aiEngine.suggestMove(computer, board);
+                gameEngine.move(board, computerMove);
             }
         }
 
-        System.out.println("GameResult : " + gameEngine.isComplete(board));
+        System.out.println("GameResult : " + gameRuleEngine.isComplete(board));
         System.out.println(board);
 
 
